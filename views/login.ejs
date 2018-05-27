@@ -1,7 +1,7 @@
 <% layout('layouts/page.ejs') -%>
-<% block('title', "Форма входа") -%>
+<% block('title', "Регистрация и вход") -%>
 
-<form>
+<form name='login-form'>
   <div class="form-group">
     <label for="exampleInputEmail1">Логин: </label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -11,4 +11,37 @@
     <input type="password" class="form-control" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-primary">Войти</button>
+  <span class="help-block error"></span>
 </form>
+
+<script>
+
+  $(document.form['login-form']).on('submit', function() {
+    
+    var form = $(this);
+
+    $('.error', form).html('');
+    $(':submit', form).button("loading");
+
+    $.ajax({
+      url: "/login",
+      method: "POST",
+      data: form.serialize(),
+      complete: function() {
+        $(":submit", form).button("reset");
+      },
+      statusCode: {
+        200: function() {
+          form.html("Вы вошли на сайт").addClass("alert-success");
+          window.location.href = "/chat";
+        },
+        403: function(jqXHR) {
+          var error = JSON.parse(jqXHR.responseText);
+          $('.error', form).html(error.message);
+        }
+      }
+    });
+    return false;
+  });
+
+</script>
