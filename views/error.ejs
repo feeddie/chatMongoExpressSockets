@@ -1,0 +1,7 @@
+<% layout('layouts/page.ejs') -%>
+<% block('title', error.name) -%>
+
+<p>
+  Извините, возникла ошибка :( <br>
+  <%-error.message -%>
+</p>

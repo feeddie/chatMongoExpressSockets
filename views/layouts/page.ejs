@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= blocks.title %></title>
+
+    <link rel="stylesheet" href="/libs/bower_components/bootstrap/dist/css/bootstrap.min.css" />  
+    <link rel='stylesheet' href='/css/main.css' />
+
+    <script src="/libs/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="container">
+      <header>
+        <%-partial('../partials/header.ejs') -%>
+      </header>
+      
+      <main>
+        <h1><%= blocks.title %></h1>
+        <%- body -%>
+      </main>
+
+      <footer>
+        <%-partial('../partials/footer.ejs') -%>
+      </footer>
+    </div>
+
+  </body>
+</html>
